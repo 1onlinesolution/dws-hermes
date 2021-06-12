@@ -2,13 +2,7 @@ const supertest = require('supertest');
 const assert = require('assert');
 const { HttpStatus } = require('@1onlinesolution/dws-http');
 const app = require('../app');
-
-const message = {
-  from: 'team@damianos.io',
-  to: 'team@damianos.io',
-  subject: '@1onlinesolution/dws-hermes - Testing email service',
-  text: 'Hello world',
-};
+const env = require('../src/env');
 
 describe('GET /', function () {
   let request;
@@ -94,7 +88,14 @@ describe('POST /api/mail', function () {
       .end(done);
   });
 
-  it('responds with success if message is defined - 1st way', function (done) {
+  it('responds with success if message is defined - 1st way - one email', function (done) {
+    const message = {
+      from: `${env.email.username}`,
+      to: `${env.email.username}`,
+      subject: '@1onlinesolution/dws-hermes - Testing email service',
+      text: 'Hello world',
+    };
+
     request
       .post('/api/mail')
       .send({ message: message })
@@ -117,7 +118,116 @@ describe('POST /api/mail', function () {
       .catch((err) => done(err));
   });
 
-  it('responds with success if message is defined - 2nd way', function (done) {
+  it('responds with success if message is defined - 1st way - multiple emails', function (done) {
+    const message = {
+      from: `${env.email.username}`,
+      to: `${env.email.username},${env.email.username2}`,
+      subject: '@1onlinesolution/dws-hermes - Testing email service',
+      text: 'Hello world',
+    };
+
+    request
+      .post('/api/mail')
+      .send({ message: message })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        assert(res.body.status === HttpStatus.statusCreated);
+        assert(res.body.success === true);
+        assert(typeof res.body.value === 'object');
+        assert(res.body.value.accepted);
+        assert(res.body.value.accepted.length === 2);
+        const recipients = message.to.split(',');
+        assert(res.body.value.accepted[0] === recipients[0]);
+        assert(res.body.value.accepted[1] === recipients[1]);
+        assert(res.body.value.rejected);
+        assert(res.body.value.rejected.length === 0);
+        assert(res.body.value.response.includes('250 2.0.0 Ok: queued as'));
+        assert(res.body.value.envelope.from === message.from);
+        assert(res.body.value.envelope.to.length === 2);
+        assert(res.body.value.envelope.to[0] === recipients[0]);
+        assert(res.body.value.envelope.to[1] === recipients[1]);
+        done();
+      })
+      .catch((err) => done(err));
+  });
+
+  it('responds with success if message is defined - 1st way - multiple emails via cc', function (done) {
+    const message = {
+      from: `${env.email.username}`,
+      to: `${env.email.username}`,
+      cc: `${env.email.username2}`,
+      subject: '@1onlinesolution/dws-hermes - Testing email service',
+      text: 'Hello world',
+    };
+
+    request
+      .post('/api/mail')
+      .send({ message: message })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        assert(res.body.status === HttpStatus.statusCreated);
+        assert(res.body.success === true);
+        assert(typeof res.body.value === 'object');
+        assert(res.body.value.accepted);
+        assert(res.body.value.accepted.length === 2);
+        assert(res.body.value.accepted[0] === message.to);
+        assert(res.body.value.accepted[1] === message.cc);
+        assert(res.body.value.rejected);
+        assert(res.body.value.rejected.length === 0);
+        assert(res.body.value.response.includes('250 2.0.0 Ok: queued as'));
+        assert(res.body.value.envelope.from === message.from);
+        assert(res.body.value.envelope.to.length === 2);
+        assert(res.body.value.envelope.to[0] === message.to);
+        assert(res.body.value.envelope.to[1] === message.cc);
+        done();
+      })
+      .catch((err) => done(err));
+  });
+
+  it('responds with success if message is defined - 1st way - multiple emails via bcc', function (done) {
+    const message = {
+      from: `${env.email.username}`,
+      to: `${env.email.username}`,
+      bcc: `${env.email.username2}`,
+      subject: '@1onlinesolution/dws-hermes - Testing email service',
+      text: 'Hello world',
+    };
+
+    request
+      .post('/api/mail')
+      .send({ message: message })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .then((res) => {
+        assert(res.body.status === HttpStatus.statusCreated);
+        assert(res.body.success === true);
+        assert(typeof res.body.value === 'object');
+        assert(res.body.value.accepted);
+        assert(res.body.value.accepted.length === 2);
+        assert(res.body.value.accepted[0] === message.to);
+        assert(res.body.value.accepted[1] === message.bcc);
+        assert(res.body.value.rejected);
+        assert(res.body.value.rejected.length === 0);
+        assert(res.body.value.response.includes('250 2.0.0 Ok: queued as'));
+        assert(res.body.value.envelope.from === message.from);
+        assert(res.body.value.envelope.to.length === 2);
+        assert(res.body.value.envelope.to[0] === message.to);
+        assert(res.body.value.envelope.to[1] === message.bcc);
+        done();
+      })
+      .catch((err) => done(err));
+  });
+
+  it('responds with success if message is defined - 2nd way - one email', function (done) {
+    const message = {
+      from: `${env.email.username}`,
+      to: `${env.email.username}`,
+      subject: '@1onlinesolution/dws-hermes - Testing email service',
+      text: 'Hello world',
+    };
+
     (async () => {
       try {
         const res = await request.post('/api/mail').send({ message: message });

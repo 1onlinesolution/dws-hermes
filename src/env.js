@@ -5,6 +5,7 @@ const BODYPARSER_JSON_LIMIT = requireFromEnv('BODYPARSER_JSON_LIMIT', false) || 
 
 const EMAIL_HOST = requireFromEnv('EMAIL_HOST');
 const EMAIL_USERNAME = requireFromEnv('EMAIL_USERNAME');
+const EMAIL_USERNAME2 = requireFromEnv('EMAIL_USERNAME2');
 const EMAIL_PASSWORD = requireFromEnv('EMAIL_PASSWORD');
 
 
@@ -28,6 +29,7 @@ module.exports = {
     host: EMAIL_HOST,
     username: EMAIL_USERNAME,
     password: EMAIL_PASSWORD,
+    username2: EMAIL_USERNAME2,
   },
   // version: packageJson.version,
 };
