@@ -33,6 +33,7 @@ exports.postMail = async (req, res) => {
 
     return res.json(HttpStatusResponse.created(value, undefined, ip));
   } catch (err) {
+    console.log('*** Error', err);
     return res.json(HttpStatusResponse.serverError(undefined, isProduction ? err.message : err, ip));
   }
 };
