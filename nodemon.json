@@ -1,0 +1,12 @@
+{
+  "verbose": false,
+  "delay": 2500,
+  "ignore": [
+    "node_modules/*"
+  ],
+  "watch": [
+    "src/**/*.js",
+    "*.js"
+  ],
+  "exec": "node -r dotenv/config server.js"
+}
