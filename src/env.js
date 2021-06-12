@@ -26,7 +26,7 @@ module.exports = {
   },
   email: {
     host: EMAIL_HOST,
-    userName: EMAIL_USERNAME,
+    username: EMAIL_USERNAME,
     password: EMAIL_PASSWORD,
   },
   // version: packageJson.version,
