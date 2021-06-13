@@ -1,5 +1,5 @@
 const ControllerBase = require('@1onlinesolution/dws-express-app/lib/controllers/controllerBase');
-const { EmailService } = require('@1onlinesolution/dws-mail');
+const EmailService = require('@1onlinesolution/dws-mail/lib/emailService');
 const { HttpStatusResponse, ipAddress } = require('@1onlinesolution/dws-http');
 const env = require('../env');
 
