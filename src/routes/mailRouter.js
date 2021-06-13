@@ -1,9 +1,7 @@
 const MailController = require('../controllers/mailController');
 
-const apiRoot = '/api';
-
 module.exports = (app) => {
-  let routerInfo = app.addRouter(apiRoot);
+  let routerInfo = app.addRouter('/api');
   const router = routerInfo.router;
 
   const controller = new MailController(app);

@@ -1,6 +1,6 @@
 {
   "name": "@1onlinesolution/dws-hermes",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Hermes service",
   "main": "server.js",
   "scripts": {

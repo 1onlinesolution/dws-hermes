@@ -21,5 +21,4 @@ module.exports = {
     password: getenv('EMAIL_PASSWORD'),
     username2: getenv('EMAIL_USERNAME2'),
   },
-  // version: packageJson.version,
 };
