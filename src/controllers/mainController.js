@@ -3,8 +3,6 @@ const { EmailService } = require('@1onlinesolution/dws-mail');
 const { HttpStatusResponse, ipAddress } = require('@1onlinesolution/dws-http');
 const env = require('../env');
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 class MainController extends ControllerBase {
   constructor(expressApp) {
     super(expressApp);
