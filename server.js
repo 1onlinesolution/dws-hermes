@@ -1,6 +1,8 @@
 const env = require('./src/env');
-const app = require('./app');
+const express = require('./app');
 
-app.listen(env.port, () => {
+express.listen(env.port, () => {
   console.log('Listening at port:', env.port);
 });
+
+module.exports = express.app;

@@ -1,6 +1,6 @@
 {
   "name": "@1onlinesolution/dws-hermes",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Hermes service",
   "main": "server.js",
   "scripts": {
@@ -33,6 +33,7 @@
     "supertest": "^6.1.3"
   },
   "dependencies": {
+    "@1onlinesolution/dws-express-app": "^0.0.2",
     "@1onlinesolution/dws-http": "^0.0.3",
     "@1onlinesolution/dws-mail": "^0.1.2",
     "@1onlinesolution/dws-utils": "^0.1.0",
