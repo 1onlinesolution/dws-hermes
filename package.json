@@ -1,6 +1,6 @@
 {
   "name": "@1onlinesolution/dws-hermes",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Hermes service",
   "main": "server.js",
   "scripts": {
@@ -35,6 +35,7 @@
   "dependencies": {
     "@1onlinesolution/dws-http": "^0.0.3",
     "@1onlinesolution/dws-mail": "^0.1.2",
+    "@1onlinesolution/dws-utils": "^0.1.0",
     "body-parser": "^1.19.0",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
