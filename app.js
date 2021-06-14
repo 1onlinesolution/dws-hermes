@@ -1,4 +1,3 @@
-const { HttpStatusResponse } = require('@1onlinesolution/dws-http');
 const ExpressApplication = require('@1onlinesolution/dws-express-app/lib/expressApplication');
 const env = require('./src/env');
 
@@ -14,7 +13,7 @@ const express = new ExpressApplication({
 });
 
 // Routes
-require('./src/routes/mainRouter')(express);
-require('./src/routes/mailRouter')(express);
+require('./src/routers/mainRouter')(express);
+require('./src/routers/mailRouter')(express);
 
 module.exports = express;
