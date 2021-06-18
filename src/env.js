@@ -9,7 +9,7 @@ if (typeof CORS_ORIGIN !== 'undefined' && CORS_ORIGIN !== '') {
 module.exports = {
   appName: getenv('APP_NAME', false) || 'Hermes Service',
   env: getenv('NODE_ENV'),
-  port: parseInt(getenv('PORT', false) || 7001, 10),
+  port: parseInt(getenv('PORT_HERMES', false) || 7001, 10),
   corsOptions: corsOptions,
   bodyParser: {
     urlencodedLimit: getenv('BODYPARSER_URLENCODED_LIMIT', false) || '1mb',
