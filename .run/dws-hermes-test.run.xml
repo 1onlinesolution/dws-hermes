@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="dws-hermes-test" type="mocha-javascript-test-runner">
     <node-interpreter>project</node-interpreter>
-    <node-options>-r dotenv/config</node-options>
+    <node-options />
     <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
     <working-directory>$PROJECT_DIR$</working-directory>
     <pass-parent-env>true</pass-parent-env>
